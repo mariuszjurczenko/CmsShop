@@ -6,6 +6,13 @@
 
 <h2>Dodawanie Strony</h2>
 
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
