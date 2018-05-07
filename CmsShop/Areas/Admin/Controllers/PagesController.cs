@@ -163,5 +163,28 @@ namespace CmsShop.Areas.Admin.Controllers
             //Redirect
             return RedirectToAction("EditPage");
         }
+
+        public ActionResult Details(int id)
+        {
+            //deklaracja PageVM
+            PageVM model;
+
+            using (Db db = new Db())
+            {
+                // Pobranie strony o id
+                PageDTO dto = db.Pages.Find(id);
+
+                // sprawdzenie czy strona o takim id istnieje
+                if (dto == null)
+                {
+                    return Content("Strona o podanym id nie istnieje.");
+                }
+
+                // inicjalizacja PageVM
+                model = new PageVM(dto);
+            }
+
+            return View(model);
+        }
     }
 }
