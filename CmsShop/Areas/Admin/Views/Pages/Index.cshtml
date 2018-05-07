@@ -46,10 +46,31 @@ else
                 <td>
                     @Html.ActionLink("Edycja", "EditPage", new { id = item.Id }) |
                     @Html.ActionLink("Szczegóły", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                    @if (item.Slug != "home")
+                    {
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id }, new { @class = "delete" })
+                    }
+
                 </td>
             </tr>
         }
 
     </table>
+}
+
+
+@section scripts{
+
+    <script>
+
+        $(function () {
+
+            $("a.delete").click(function () {
+                if (!confirm("Potwierdzasz usuniecię strony")) return false;
+            });
+
+        });
+
+    </script>
+
 }
