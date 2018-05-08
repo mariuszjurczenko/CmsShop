@@ -1,5 +1,6 @@
 ﻿using CmsShop.Models.Data;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace CmsShop.Models.ViewModels.Pages
 {
@@ -30,6 +31,7 @@ namespace CmsShop.Models.ViewModels.Pages
         [Required]
         [StringLength(int.MaxValue, MinimumLength = 3)]
         [Display(Name = "Zawartość Strony")]
+        [AllowHtml]
         public string Body { get; set; }
         public int Sorting { get; set; }
         [Display(Name = "Pasek Boczny")]
