@@ -34,7 +34,6 @@ else
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
                     @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </td>
                 <td>
@@ -44,4 +43,33 @@ else
         }
 
     </table>
+}
+
+@section scripts {
+
+    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+    <script>
+
+        $(function () {
+
+            /*
+            * Dodawanie nowej kategorii
+            */
+
+
+
+            ///////////////////////////////////////////////////////////////////////
+
+            /*
+            *       
+            */
+
+
+            ///////////////////////////////////////////////////////////////////////
+
+        })
+
+    </script>
+
 }
