@@ -7,9 +7,9 @@
 <h2>Sklep kategorie</h2>
 
 <div class="new-cat">
-    <input type="text" id="newCatName" />
+    <input type="text" id="newcatname" />
     <p>
-        <a href="#" id="newCata">Dodaj Nową Kategorię</a>
+        <a href="#" id="newcata">Dodaj Nową Kategorię</a>
         <span class="ajax-text">
             <img src="~/Content/img/ajax-loader.gif" />
         </span>
@@ -57,12 +57,76 @@ else
             * Dodawanie nowej kategorii
             */
 
+            var newCatA = $("a#newcata");
+            var newCatTextInput = $("#newcatname");
+            var ajaxText = $("span.ajax-text");
+            var table = $("table#pages tbody");
+
+
+            newCatTextInput.keyup(function (e) {
+                if (e.keyCode == 13) {
+                    newCatA.click();
+                }
+            })
+
+            newCatA.click(function (e) {
+                e.preventDefault();
+
+                var catName = newCatTextInput.val();
+
+                if (catName.length < 2) {
+                    alert("Nazwa ketegorii musi mieć conajmniej 2 znaki!");
+                    return false
+                }
+
+                ajaxText.show();
+
+                var url = "/admin/shop/AddNewCategory"
+
+                $.post(url, { catName: catName }, function (data) {
+
+                    var response = data.trim();
+
+                    if (response == "tytulzajety") {
+                        ajaxText.html("<span class='alert alert-danger'>Ten tytuł już jest zajęty!</span>")
+                        setTimeout(function () {
+                            ajaxText.fadeOut("fast", function () {
+                                ajaxText.html("<img src=/Content/img/ajax-loader.gif />");
+                            });
+                        }, 2000);
+                        return false;
+                    } else {
+                        if (!$("table#pages").length) {
+                            location.reload();
+                        }
+                        else {
+                            ajaxText.html("<span class='alert alert-success'>Kategoria została dodana</span>")
+                            setTimeout(function () {
+                                ajaxText.fadeOut("fast", function () {
+                                    ajaxText.html("<img src=/Content/img/ajax-loader.gif />");
+                                });
+                            }, 2000);
+
+                            newCatTextInput.val("");
+
+                            var toAppend = $("table#pages tbody tr:last").clone();
+                            toAppend.attr("id", "id_" + data)
+                            toAppend.find("#item_Name").val(catName);
+                            toAppend.find("a.delete").attr("href", "/admin/shop/DeleteCategory/" + data);
+                            table.append(toAppend);
+                            table.sortable("refresh");
+                        }
+                    }
+                })
+            })
 
 
             ///////////////////////////////////////////////////////////////////////
 
+
+
             /*
-            *       
+            *
             */
 
 
