@@ -22,7 +22,7 @@
 }
 else
 {
-    <table class="table sorting" id="pages">
+    <table class="table sorting categories" id="pages">
         <tr class="home">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -32,7 +32,7 @@ else
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="id_@item.Id">
                 <td>
                     @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </td>
@@ -126,12 +126,37 @@ else
 
 
             /*
-            *
+            * Sortowanie Kategorii
             */
+
+            $("table#pages tbody").sortable({
+                items: "tr:not(.home)",
+                placeholder: "ui-state-highlight",
+                update: function () {
+                    var ids = $("table#pages tbody").sortable("serialize");
+                    var url = "/Admin/Shop/ReorderCategories";
+
+                    $.post(url, ids, function (data) {
+                    });
+                }
+            });
 
 
             ///////////////////////////////////////////////////////////////////////
 
+
+
+
+            /*
+            * Potwierdzeni Usuwania Kategorii
+            */
+
+            $("body").on("click", "a.delete", function () {
+                if (!confirm("Potwierdz usunięcie kategorii")) return false;
+            });
+
+
+            ///////////////////////////////////////////////////////////////////////
         })
 
     </script>

@@ -14,3 +14,7 @@ div.new-cat {
     margin-top: 30px;
     position:relative;
 }
+
+table.sorting.categories td {
+    padding: 20px !important;
+}

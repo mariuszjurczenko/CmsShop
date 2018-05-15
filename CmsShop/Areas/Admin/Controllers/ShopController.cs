@@ -55,5 +55,52 @@ namespace CmsShop.Areas.Admin.Controllers
 
             return id;
         }
+
+        // POST: Admin/Shop/ReorderCategories
+        [HttpPost]
+        public ActionResult ReorderCategories(int[] id)
+        {
+            using (Db db = new Db())
+            {
+                // inicjalizacja licznika
+                int count = 1;
+
+                // deklaracja DTO
+                CategoryDTO dto;
+
+                // sortowanie kategorii
+                foreach (var catId in id)
+                {
+                    dto = db.Categories.Find(catId);
+                    dto.Sorting = count;
+
+                    // zapis na bazie
+                    db.SaveChanges();
+
+                    count++;
+                }
+            }
+
+            return View();
+        }
+
+        // GET: Admin/Shop/DeleteCategory
+        [HttpGet]
+        public ActionResult DeleteCategory(int id)
+        {
+            using (Db db = new Db())
+            {
+                // pobieramy kategorie o podnym id
+                CategoryDTO dto = db.Categories.Find(id);
+
+                // usuwamy kategorie
+                db.Categories.Remove(dto);
+
+                // zapis na bazie
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Categories");
+        }
     }
 }
