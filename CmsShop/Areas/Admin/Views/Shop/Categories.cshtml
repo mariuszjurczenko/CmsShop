@@ -34,6 +34,7 @@ else
         {
             <tr id="id_@item.Id">
                 <td>
+                    <div class="ajaxdivtd"></div>
                     @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </td>
                 <td>
@@ -157,7 +158,65 @@ else
 
 
             ///////////////////////////////////////////////////////////////////////
-        })
+
+
+
+
+            /*
+            * Zmiana Nazwy Kategorii
+            */
+
+            var orginalTextBoxValue;
+
+            $("table#pages input.text-box").dblclick(function () {
+                orginalTextBoxValue = $(this).val();
+                $(this).attr("readonly", false);
+            });
+
+            $("table#pages input.text-box").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    @(this).blur();
+                }
+            });
+
+            $("table#pages input.text-box").blur(function () {
+
+                var $this = $(this);
+                var ajaxdiv = $this.parent().find(".ajaxdivtd");
+                var newCatName = $this.val();
+                var id = $this.parent().parent().attr("id").substring(3);
+                var url = "admin/shop/RenameCategory";
+
+                if (newCatName.length < 2) {
+                    alert("Nazwa kategorii musi mieć conajmniej 2 znaki");
+                    $this.attr("readonly", true);
+                    return false;
+                }
+
+                $.post(url, { newCatName: newCatName, id: id }, function (data) {
+
+                    var response = data.trim();
+
+                    if (response == "tytulzajety") {
+                        $this.val(orginalTextBoxValue);
+                        ajaxdiv.html("<span class='alert alert-danger'>Ta kategoria jest zajęty!</span>").show();
+                    } else {
+                        ajaxdiv.html("<span class='alert alert-success'>Nazwa kategorii została zmieniona!</span>").show();
+                    }
+
+                    setTimeout(function () {
+                        ajaxdiv.fadeOut("fast", function () {
+                            ajaxdiv.html("");
+                        });
+                    }, 2000);
+                }).done(function () {
+                    $this.attr("readonly", true);
+                });
+            });
+
+
+            ///////////////////////////////////////////////////////////////////////
+        });
 
     </script>
 
