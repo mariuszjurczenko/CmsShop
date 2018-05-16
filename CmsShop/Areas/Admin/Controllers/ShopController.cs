@@ -2,6 +2,7 @@
 using CmsShop.Models.ViewModels.Shop;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CmsShop.Areas.Admin.Controllers
@@ -141,6 +142,68 @@ namespace CmsShop.Areas.Admin.Controllers
             }
 
             return View(model);
+        }
+
+        // POST: Admin/Shop/AddProduct
+        [HttpPost]
+        public ActionResult AddProduct(ProductVM model, HttpPostedFileBase file)
+        {
+            // sprawdzamy model state
+            if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    return View(model);
+                }              
+            }
+
+            // sprawdzenie czy nazwa produktu jest unikalna
+            using (Db db = new Db())
+            {
+                if (db.Products.Any(x => x.Name == model.Name))
+                {
+                    model.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
+                    ModelState.AddModelError("","Ta nazwa produktu jest zajęta!");
+                    return View(model);
+                }
+            }
+
+            // deklaracja product id
+            int id;
+
+            // dodawanie produktu i zapis na bazie
+            using (Db db = new Db())
+            {
+                ProductDTO product = new ProductDTO();
+                product.Name = model.Name;
+                product.Slug = model.Name.Replace(" ", "-").ToLower();
+                product.Description = model.Description;
+                product.Price = model.Price;
+                product.CategoryId = model.CategoryId;
+
+                CategoryDTO catDto = db.Categories.FirstOrDefault(x => x.Id == model.CategoryId);
+                product.CategoryName = catDto.Name;
+
+                db.Products.Add(product);
+                db.SaveChanges();
+
+                // pobranie id dodanego produktu
+                id = product.Id;
+            }
+
+            // ustawiamy komunikat 
+            TempData["SM"] = "Dodałeś produkt";
+
+            #region Upload Image
+
+
+
+
+
+            #endregion
+
+            return View();
         }
     }
 }
