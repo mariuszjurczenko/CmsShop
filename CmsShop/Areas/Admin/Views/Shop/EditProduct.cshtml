@@ -1,0 +1,74 @@
+﻿@model CmsShop.Models.ViewModels.Shop.ProductVM
+
+@{
+    ViewBag.Title = "Edycja Produktu";
+}
+
+<h2>Edycja Produktu</h2>
+
+@using (Html.BeginForm("EditProduct", "Shop", FormMethod.Post, new { enctype = "multipart/from-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Kategoria</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CategoryId, Model.Categories, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Zdjecie</label>
+            @Html.EditorFor(model => model.ImageName, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10">
+                <img src="/Images/Uploads/Products/@Model.Id/Thumbs/@Model.ImageName" />
+                <br /><br />
+                <img id="imgpreview" src="#" />
+                <br /><br />
+                <div class="col-md-10">
+                    <input type="file" name="file" id="ImageUpload" />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Edycja" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
