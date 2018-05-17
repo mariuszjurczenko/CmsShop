@@ -1,0 +1,102 @@
+﻿@model IEnumerable<CmsShop.Models.ViewModels.Shop.ProductVM>
+
+@{
+    ViewBag.Title = "Produkty";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Produkty</h2>
+
+<select id="SelectCategory" name="SelectCategory">
+    <option value="0">Wszystkie</option>
+    @foreach (var item in ViewBag.Categories)
+    {
+        if (ViewBag.SelectedCat == item.Value)
+        {
+            <option selected="selected" value="@item.Value">@item.Text</option>
+        }
+        else
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    }
+</select>
+<br /><br />
+
+<p>
+    @Html.ActionLink("Dodaj Nowy Produkt", "AddProduct")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Cena
+        </th>
+        <th>
+            Zdjecie
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var product in ViewBag.OnePageOfProducts)
+    {
+        <tr>
+            <td>
+                @product.Name
+            </td>
+            <td>
+                @product.Description
+            </td>
+            <td>
+                @product.Price
+            </td>
+            <td>
+                <a href="/admin/shop/EditProduct/@product.Id">
+                    <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" />
+                </a>
+            </td>
+            <td>
+                @Html.ActionLink("Edycja", "EditProduct", new { id = product.Id }) |
+                @Html.ActionLink("Usuń", "DeleteProduct", new { id = product.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+
+
+@section scripts {
+
+    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+    <script>
+
+        /*
+        * filtrowanie do wybranej kategorii
+        */
+
+        $("#SelectCategory").on("change", function () {
+            var url = $(this).val();
+
+            if (url) {
+                window.location = "/admin/shop/Products?catId=" + url;
+            }
+
+            return false;
+        })
+   
+        //////////////////////////////////////////////////////////////////
+  
+    </script>
+
+}
