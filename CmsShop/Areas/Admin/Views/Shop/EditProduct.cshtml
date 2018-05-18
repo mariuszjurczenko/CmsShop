@@ -6,6 +6,23 @@
 
 <h2>Edycja Produktu</h2>
 
+<div>
+    @Html.ActionLink("Powrót do produktów", "Index")
+</div>
+
+<style>
+    input#ImageName {
+        display: none;
+    }
+</style>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
 @using (Html.BeginForm("EditProduct", "Shop", FormMethod.Post, new { enctype = "multipart/from-data" }))
 {
     @Html.AntiForgeryToken()
@@ -69,6 +86,4 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
