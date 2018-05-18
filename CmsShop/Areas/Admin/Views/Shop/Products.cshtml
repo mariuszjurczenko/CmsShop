@@ -65,7 +65,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edycja", "EditProduct", new { id = product.Id }) |
-                @Html.ActionLink("Usuń", "DeleteProduct", new { id = product.Id })
+                @Html.ActionLink("Usuń", "DeleteProduct", new { id = product.Id }, new { @class = "delete" });
             </td>
         </tr>
     }
@@ -94,9 +94,22 @@
 
             return false;
         })
-   
+
         //////////////////////////////////////////////////////////////////
-  
+
+
+        /*
+        * Potwierdzasz usuniecię produktu
+        */
+        $(function () {
+
+            $("a.delete").click(function () {
+                if (!confirm("Potwierdzasz usuniecię produktu")) return false;
+            });
+
+        });
+            //////////////////////////////////////////////////////////////////
+
     </script>
 
 }
