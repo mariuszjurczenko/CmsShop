@@ -105,7 +105,7 @@
 
 @foreach (var image in Model.GalleryImages)
 {
-    <div style="display: inline-block">
+    <div style="display: inline-block; margin-right: 15px;">
         <img src="/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@image" />
         @Html.ActionLink("usun", "DeleteImage", "Shop", new { @class = "deleteimage", data_name = image })
     </div>
@@ -163,11 +163,31 @@
                 }
             };
 
+            /////////////////////////////////////////////////////////////////////////////
 
 
+            /*
+            * usuwanie obrazkow z galerii
+            */
+
+            $("a.deleteimage").click(function (e) {
+                e.preventDefault();
+
+                if(!confirm("Potwierdzasz usunicie obrazka")) return false
+
+                var $this = $(this);
+                var url = "/admin/shop/DeleteImage";
+                var imageName = $this.data("name");
+
+
+                $.post(url, { id: @Model.Id, imageName: imageName }, function (data) {
+                    $this.parent().fadeOut("fast");
+                });
+            });
 
             /////////////////////////////////////////////////////////////////////////////
 
+            
         });
 
     </script>
