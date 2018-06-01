@@ -888,6 +888,7 @@
     <Content Include="Views\Pages\PagesMenuPartial.cshtml" />
     <Content Include="Views\Pages\SidebarPartial.cshtml" />
     <Content Include="Views\Shop\CategoryMenuPartial.cshtml" />
+    <Content Include="Views\Shop\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
