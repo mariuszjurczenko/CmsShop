@@ -20,7 +20,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @Html.Action("PagesMenuPartial", "Pages");
+                    @Html.Action("PagesMenuPartial", "Pages")
                 </ul>
             </div>
         </div>
@@ -34,7 +34,7 @@
                     @RenderBody()
                 </div>
                 <div class="col-xs-12 col-md-3">
-
+                    @Html.Action("SidebarPartial", "Pages")
                 </div>
             }
             else
