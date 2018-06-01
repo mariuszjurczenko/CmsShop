@@ -28,6 +28,11 @@
     <div class="container body-content">
 
         <div class="row">
+
+            <div class="col-xs-12 col-md-2">
+                @Html.Action("CategoryMenuPartial", "Shop")
+            </div>
+
             @if (ViewBag.Sidebar == "Tak")
             {
                 <div class="col-xs-12 col-md-7">
