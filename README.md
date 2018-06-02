@@ -8,13 +8,13 @@ i który został podzielony na mniejsze moduły funkcjonalne takie jak:
 
 Moduły funkcjonalne kursu:
 
-rozpoczęcie projektu, konfiguracja, administracja CMS – (czas trwania modułu (4,04h)) CMSShop moduł 1
-administracja sklep internetowy cz.1 – (przewidywany czas (4-5h)) CMSShop moduł 2
-administracja sklep internetowy cz.2 – (przewidywany czas (4-5h)) CMSShop moduł 3
-front cms, sklep internetowy – (przewidywany czas (5-6h)) CMSShop moduł 4
-sklep – koszyk – (przewidywany czas (5-6h)) CMSShop moduł 5
-rejestracja, logowanie, role – (przewidywany czas (5-6h)) CMSShop moduł 6
-zamowienia, template adminLTE – (przewidywany czas (5-6h)) CMSShop moduł 7
+rozpoczęcie projektu, konfiguracja, administracja CMS – (czas trwania około (4h)) CMSShop moduł 1
+administracja sklep internetowy cz.1 – (czas trwania około (4h)) CMSShop moduł 2
+administracja sklep internetowy cz.2 – (czas trwania okołos (3h)) CMSShop moduł 3
+front cms, sklep internetowy – (czas trwania około (2h)) CMSShop moduł 4
+sklep – koszyk – (przewidywany czas (4h)) CMSShop moduł 5
+rejestracja, logowanie, role – (przewidywany czas (4h)) CMSShop moduł 6
+zamowienia, template adminLTE – (przewidywany czas (4-5h)) CMSShop moduł 7
 
 W projekcie zostały wykorzystane technologie:
 
