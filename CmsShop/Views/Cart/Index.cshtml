@@ -39,28 +39,28 @@ else
 
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td class="qty@(item.ProductId)">
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price) zł.
-            </td>
-            <td>
-                <img src="/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
-            </td>
-            <td>
-                <a href="#" class="incrproduct" data-id="@item.ProductId">+</a>
-                <a href="#" class="decrproduct" data-id="@item.ProductId">-</a>
-                <a href="#" class="removrproduct" data-id="@item.ProductId">Usuń</a>
-            </td>
-            <td class="total@(item.ProductId)"> 
-                @Html.DisplayFor(modelItem => item.Total) zł.
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td class="qty@(item.ProductId)">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price) zł.
+                </td>
+                <td>
+                    <img src="/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
+                </td>
+                <td>
+                    <a href="#" class="incrproduct" data-id="@item.ProductId">+</a>
+                    <a href="#" class="decrproduct" data-id="@item.ProductId">-</a>
+                    <a href="#" class="removrproduct" data-id="@item.ProductId">Usuń</a>
+                </td>
+                <td class="total@(item.ProductId)">
+                    @Html.DisplayFor(modelItem => item.Total) zł.
+                </td>
+            </tr>
         }
         <tr>
             <td></td>
@@ -73,4 +73,44 @@ else
         </tr>
 
     </table>
+}
+
+@section scripts{
+
+    <script>
+
+
+        $(function () {
+
+
+            /*
+            *  Zwiekszenie ilosci produktu w koszyku
+            */
+            $("a.incrproduct").click(function (e) {
+
+                e.preventDefault();
+                var productId = $(this).data("id");
+                var url = "/cart/IncrementProduct";
+
+                $.getJSON(url, { productId: productId }, function (data) {
+
+                    $("td.qty" + productId).html(data.qty);
+
+                    var price = data.qty * data.price;
+                    var priceHtml = price.toFixed(2) + " zł."
+
+                    $("td.total" + productId).html(priceHtml);
+
+                    var gt = parseFloat($("td.grandtotal span").text());
+                    var grandtotal = (gt + data.price).toFixed(2);
+
+                    $("td.grandtotal span").text(grandtotal);
+                });
+            });
+            //////////////////////////////////////////////////////////////////
+
+
+
+        });
+    </script>
 }
