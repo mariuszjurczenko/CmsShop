@@ -53,8 +53,11 @@ namespace CmsShop.Controllers
                 foreach (var item in list)
                 {
                     qty += item.Quantity;
-                    price += item.Quantity * item.ProductId;
+                    price += item.Quantity * item.Price;
                 }
+
+                model.Quantity = qty;
+                model.Price = price;
             }
             else
             {
@@ -65,7 +68,7 @@ namespace CmsShop.Controllers
 
             return PartialView(model);
         }
-
+         
         public ActionResult AddToCartPartial(int id)
         {
             // Inicjalizacja CartVM List
