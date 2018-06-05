@@ -910,6 +910,7 @@
     <Content Include="Views\Shop\ProductDetails.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\AddToCartPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
