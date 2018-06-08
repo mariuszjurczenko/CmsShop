@@ -31,4 +31,4 @@ W projekcie zostały wykorzystane technologie:
 – CKEditor, Roxy File Manager, Drag And Drop 
 – i inne …
 
-www.dev-hobby.pl
+dev-hobby.pl
