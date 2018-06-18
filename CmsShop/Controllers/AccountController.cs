@@ -2,6 +2,7 @@
 using CmsShop.Models.ViewModels.Account;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CmsShop.Controllers
 {
@@ -14,6 +15,7 @@ namespace CmsShop.Controllers
         }
 
         // GET: /account/login
+        [HttpGet]
         public ActionResult Login()
         {
             // sprawdzanie czy uzytkownik nie jest juz zalogowany
@@ -23,6 +25,38 @@ namespace CmsShop.Controllers
 
             // zwracamy widok
             return View();
+        }
+
+        // POST: /account/login
+        [HttpPost]
+        public ActionResult Login(LoginUserVM model)
+        {
+            // sprawdzenie model state
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // sprawdzamy uzytkownika
+            bool isValid = false;
+            using (Db db = new Db())
+            {
+                if (db.Users.Any(x => x.UserName.Equals(model.UserName) && x.Password.Equals(model.Password)))
+                {
+                    isValid = true;
+                }
+            }
+
+            if (!isValid)
+            {
+                ModelState.AddModelError("", "Nieprawidłowa nazwa użytkownika lub hasło");
+                return View(model);
+            }
+            else
+            {
+                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                return Redirect(FormsAuthentication.GetRedirectUrl(model.UserName, model.RememberMe));
+            }
         }
 
         // GET: /account/create-account
@@ -93,6 +127,14 @@ namespace CmsShop.Controllers
             // TempData komunikat
             TempData["SM"] = "Jesteś teraz zarejestrowany i możesz się zalogować!";
 
+
+            return Redirect("~/account/login");
+        }
+
+        // GET: /account/logout
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
 
             return Redirect("~/account/login");
         }
