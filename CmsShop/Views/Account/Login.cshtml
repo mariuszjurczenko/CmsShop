@@ -6,6 +6,13 @@
 
 <h2>Logowanie</h2>
 
+@if(TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -42,7 +49,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Zaloguj" class="btn btn-default" />
-                <a href="/account/create-account">Utwórz konto użytkownika</a>
+                &nbsp;<a href="/account/create-account">Utwórz konto użytkownika</a>
             </div>
         </div>
     </div>
