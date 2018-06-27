@@ -184,5 +184,62 @@ namespace CmsShop.Controllers
 
             return View("UserProfile", model);
         }
+
+        // POST: /account/user-profile
+        [HttpPost]
+        [ActionName("user-profile")]
+        public ActionResult UserProfile(UserProfileVM model)
+        {
+            // sprawdzenie model state
+            if (!ModelState.IsValid)
+            {
+                return View("UserProfile", model);
+            }
+
+            // sprawdzamy hasła
+            if (!string.IsNullOrWhiteSpace(model.Password))
+            {
+                if (!model.Password.Equals(model.ConfirmPassword))
+                {
+                    ModelState.AddModelError("", "Hasła nie pasują do siebie.");
+                    return View("UserProfile", model);
+                }
+            }
+
+            using (Db db = new Db())
+            {
+                // pobieramy nazwe uzytkownika
+                string username = User.Identity.Name;
+
+                // sprawdzenie czy nazwa uzytkownika jest unikalna
+                if (db.Users.Where(x => x.Id != model.Id).Any(x => x.UserName == username))
+                {
+                    ModelState.AddModelError("", "Nazwa użytkownika " + model.UserName + " zajęta");
+                    model.UserName = "";
+                    return View("UserProfile", model);
+                }
+
+                // edycja DTO
+                UserDTO dto = db.Users.Find(model.Id);
+                dto.FirstName = model.FirstName;
+                dto.LastName = model.LastName;
+                dto.EmailAddress = model.EmailAddress;
+                dto.UserName = model.UserName;
+
+                if (!string.IsNullOrWhiteSpace(model.Password))
+                {
+                    dto.Password = model.Password;
+                }
+
+                // zapis
+                db.SaveChanges();
+            }
+
+
+            // ustawienie komunikatu
+            TempData["SM"] = "Edytowałeś swój profil!";
+
+            return Redirect("~/account/user-profile");
+        }
     }
 }
