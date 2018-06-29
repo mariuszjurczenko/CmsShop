@@ -37,14 +37,37 @@
                         }
 
                     }
-                    @if (Request.IsAuthenticated)
+                    @if (Request.IsAuthenticated && User.IsInRole("User"))
                     {
-                        <li>@Html.Action("UserNavPartial", "Account", new { area = "" })</li>
+                        if (ViewBag.Title == "Profil uzytkownika")
+                        {
+                            <li class="active">@Html.Action("UserNavPartial", "Account", new { area = "" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.Action("UserNavPartial", "Account", new { area = "" })</li>
+                        }
+
                     }
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @Html.Action("CartPartial", "Cart")
-                </ul>
+
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <ul class="navbar-collapse collapse navbar-right adminarea">
+                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Admin" }, null)</li>
+                    </ul>
+                }
+                else
+                {
+                    if (ViewBag.Title != "Koszyk szczegóły")
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            @Html.Action("CartPartial", "Cart")
+                        </ul>
+                    }
+                }
+
+
             </div>
         </div>
     </div>
