@@ -167,6 +167,8 @@
     </Compile>
     <Compile Include="Models\Data\CategoryDTO.cs" />
     <Compile Include="Models\Data\DB.cs" />
+    <Compile Include="Models\Data\OrderDetailsDTO.cs" />
+    <Compile Include="Models\Data\OrderDTO.cs" />
     <Compile Include="Models\Data\PageDTO.cs" />
     <Compile Include="Models\Data\ProductDTO.cs" />
     <Compile Include="Models\Data\RoleDTO.cs" />
