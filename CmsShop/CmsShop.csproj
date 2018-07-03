@@ -534,6 +534,7 @@
     <Content Include="Areas\Admin\Views\Shop\AddProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\Products.cshtml" />
     <Content Include="Areas\Admin\Views\Shop\EditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Shop\Orders.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />
