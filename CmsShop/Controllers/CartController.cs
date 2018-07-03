@@ -175,5 +175,12 @@ namespace CmsShop.Controllers
             // usuwamy produkt
             cart.Remove(model);
         }
+
+        public ActionResult PaypalPartial()
+        {
+            List<CartVM> cart = Session["cart"] as List<CartVM>;
+
+            return PartialView(cart);
+        }
     }
 }
