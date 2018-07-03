@@ -20,16 +20,18 @@
         @Html.DisplayFor(model => model.Price)
         <br />
 
-        <div class="addtocart">
-            <a href="#" class="addtocart">Dodaj do koszyka</a>
-            <span class="loader">
-                <img src="~/Content/img/ajax-loader.gif"
-            </span>
-            <span class="ajaxmsg">
-                Ten produkt został dodany do koszyka.
-            </span>
-        </div>
-
+        @if (Request.IsAuthenticated)
+        {
+            <div class="addtocart">
+                <a href="#" class="addtocart">Dodaj do koszyka</a>
+                <span class="loader">
+                    <img src="~/Content/img/ajax-loader.gif"
+                </span>
+                <span class="ajaxmsg">
+                    Ten produkt został dodany do koszyka.
+                </span>
+            </div>
+        }
     </div>
 
 </div>

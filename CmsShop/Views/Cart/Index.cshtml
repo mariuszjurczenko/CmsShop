@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Koszyk szczegóły";
+    int count = 1;
 }
 
 <h2>Koszyk szczegóły</h2>
@@ -12,6 +13,12 @@
 }
 else
 {
+    <div class="ajaxbg">
+        <span>
+            <img src="~/Content/img/ajax-loader.gif" />
+        </span>
+    </div>
+
     <table class="table">
         <tr>
             <th>
@@ -73,6 +80,29 @@ else
         </tr>
 
     </table>
+
+    <div class="paypaldiv">
+        <form class="paypalform" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_cart">
+            <input type="hidden" name="upload" value="1">
+            <input type="hidden" name="business" value="admin@g-way.pl">
+
+            @foreach (var item in Model)
+            {
+                <input type="hidden" name="item_name_@count" value="@item.ProductName">
+                <input type="hidden" name="amount_@count" value="@item.Price">
+                <input type="hidden" name="quantity_@count" value="@item.Quantity">
+                count++;
+            }
+
+            <input type="hidden" name="currency_code" value="PLN">
+            <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Dokonuj płatności w systemie PayPal - jest szybki, bezpłatny i bezpieczny!">
+        </form>
+    </div>
+
+    <br />
+
+    <a href="#" class="placeorder btn btn-primary pull-right">Zapłać</a>
 }
 
 @section scripts{
@@ -111,9 +141,9 @@ else
 
 
 
-           /*
-           *  Zmniejszanie ilosci produktu w koszyku
-           */
+            /*
+            *  Zmniejszanie ilosci produktu w koszyku
+            */
             $("a.decrproduct").click(function (e) {
 
                 e.preventDefault();
@@ -140,16 +170,16 @@ else
                         var grandtotal = (gt - data.price).toFixed(2);
 
                         $("td.grandtotal span").text(grandtotal);
-                    }               
+                    }
                 });
             });
             //////////////////////////////////////////////////////////////////
 
 
 
-           /*
-           *  Usuwanie produktu z koszyku
-           */
+            /*
+            *  Usuwanie produktu z koszyku
+            */
             $("a.removrproduct").click(function (e) {
 
                 e.preventDefault();
