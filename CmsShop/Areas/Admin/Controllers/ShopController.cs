@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace CmsShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ShopController : Controller
     {
         // GET: Admin/Shop/Categories
