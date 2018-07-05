@@ -259,6 +259,12 @@
     <Content Include="admin-lte\js\demo.js" />
     <Content Include="admin-lte\js\pages\dashboard.js" />
     <Content Include="admin-lte\js\pages\dashboard2.js" />
+    <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.css" />
+    <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.js" />
+    <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.min.css" />
+    <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="admin-lte\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="admin-lte\plugins\datatables\jquery.dataTables.min.js" />
     <Content Include="admin-lte\plugins\fastclick\fastclick.js" />
     <Content Include="App_Data\CmsShop.mdf" />
     <Content Include="App_Data\CmsShop_log.ldf">

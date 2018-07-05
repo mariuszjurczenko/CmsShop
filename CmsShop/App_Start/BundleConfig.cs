@@ -33,7 +33,9 @@ namespace CmsShop
 
             bundles.Add(new ScriptBundle("~/admin-lte/js").Include(
                       "~/admin-lte/js/adminlte.js",
-                      "~/admin-lte/plugins/fastclick/fastclick.js"));
+                      "~/admin-lte/plugins/fastclick/fastclick.js",
+                      "~/admin-lte/plugins/datatables/jquery.dataTables.js",
+                      "~/admin-lte/plugins/datatables/dataTables.bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
@@ -41,7 +43,8 @@ namespace CmsShop
                       "~/Content/font-awesome.css",
                       "~/Content/ionicons.css",
                       "~/admin-lte/css/AdminLTE.css",
-                      "~/admin-lte/css/skins/skin-blue.css"));
+                      "~/admin-lte/css/skins/skin-blue.css",
+                      "~/admin-lte/plugins/datatables/dataTables.bootstrap.css"));
         }
     }
 }

@@ -12,42 +12,97 @@
 }
 else
 {
-    <table class="table">
-        <tr>
-            <th>
-                Numer zamówienia
-            </th>
-            <th>
-                Szczegóły zamówienia
-            </th>
-            <th>
-                Utworzone
-            </th>
-            <th>
-                Wartość
-            </th>
-        </tr>
+    <div class="box">
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="zamowiania" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Numer zamówienia
+                        </th>
+                        <th>
+                            Szczegóły zamówienia
+                        </th>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderNumber)
-                </td>
-                <td>
-                    @foreach (var item2 in item.ProductsAndQty)
+                        <th>
+                            Data zamówienia
+                        </th>
+                        <th>
+                            Wartość
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                        @item2.Key @:x @item2.Value <br />
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderNumber)
+                            </td>
+                            <td>
+                                @foreach (var item2 in item.ProductsAndQty)
+                                {
+                                    @item2.Key @:x @item2.Value <br />
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreatedAt)
+                            </td>
+                            <td>
+                                $@Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                        </tr>
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Total)
-                </td>
-            </tr>
-        }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            Numer zamówienia
+                        </th>
+                        <th>
+                            Szczegóły zamówienia
+                        </th>
 
-    </table>
+                        <th>
+                            Data zamówienia
+                        </th>
+                        <th>
+                            Wartość
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+}
+
+
+@section scripts {
+    <script>
+
+        $('#zamowiania').DataTable({
+            "language": {
+                "sProcessing": "Przetwarzanie...",
+                "sLengthMenu": "Pokaż _MENU_ pozycji",
+                "sZeroRecords": "Nie znaleziono pasujących pozycji",
+                "sInfoThousands": " ",
+                "sInfo": "Pozycje od _START_ do _END_ z _TOTAL_ łącznie",
+                "sInfoEmpty": "Pozycji 0 z 0 dostępnych",
+                "sInfoFiltered": "(filtrowanie spośród _MAX_ dostępnych pozycji)",
+                "sInfoPostFix": "",
+                "sSearch": "Szukaj:",
+                "sUrl": "",
+                "oPaginate": {
+                    "sFirst": "Pierwsza",
+                    "sPrevious": "Poprzednia",
+                    "sNext": "Następna",
+                    "sLast": "Ostatnia"
+                }
+            }
+        })
+
+    </script>
 }
