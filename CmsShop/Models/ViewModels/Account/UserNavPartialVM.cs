@@ -10,4 +10,9 @@ namespace CmsShop.Models.ViewModels.Account
         public string FirstName { get; set; }
         public string LastName { get; set; } 
     }
+
+    public class UserNavPartialVM3
+    {
+        public string Email { get; set; }
+    }
 }

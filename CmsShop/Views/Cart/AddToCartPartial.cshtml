@@ -1,5 +1,10 @@
 ﻿@model CmsShop.Models.ViewModels.Cart.CartVM
 
- Koszyk: @Model.Quantity / @Model.Price zł.
+ @*Koszyk: @Model.Quantity / @Model.Price zł.
 <br />
-@Html.ActionLink("Koszyk", "Index")
+@Html.ActionLink("Koszyk", "Index")*@
+
+
+<a href="/cart/index">
+    <span style="color:white">Koszyk: @Model.Quantity / @Model.Price zł. </span>
+</a>

@@ -1,13 +1,6 @@
 ﻿@model IEnumerable<CmsShop.Models.ViewModels.Shop.CategoryVM>
 
-<h3>Kategorie</h3>
-
-
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>
-            <a href="/shop/category/@item.Slug.ToLower()">@item.Name</a>
-        </li>
-    }
-</ul>
+@foreach (var item in Model)
+{
+    <li><a href="/shop/category/@item.Slug.ToLower()"><i class="fa fa-dashboard"></i>@item.Name</a></li>
+}

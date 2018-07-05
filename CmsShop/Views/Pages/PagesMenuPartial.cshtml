@@ -6,20 +6,12 @@
 
 @foreach (var item in Model)
 {
-
     if (tempPageTitle == item.Title)
     {
-        <li class="active">
-            <a href="/@item.Slug">@item.Title</a>
-        </li>
+        <li class="active"><a href="/@item.Slug"><i class="fa fa-dashboard"></i>@item.Title</a></li>
     }
     else
     {
-        <li>
-            <a href="/@item.Slug">@item.Title</a>
-        </li>
+        <li><a href="/@item.Slug"><i class="fa fa-dashboard"></i>@item.Title</a></li>
     }
-
 }
-
-
