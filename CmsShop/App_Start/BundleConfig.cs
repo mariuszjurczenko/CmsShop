@@ -35,7 +35,8 @@ namespace CmsShop
                       "~/admin-lte/js/adminlte.js",
                       "~/admin-lte/plugins/fastclick/fastclick.js",
                       "~/admin-lte/plugins/datatables/jquery.dataTables.js",
-                      "~/admin-lte/plugins/datatables/dataTables.bootstrap.js"));
+                      "~/admin-lte/plugins/datatables/dataTables.bootstrap.js",
+                      "~/admin-lte/plugins/chartjs/Chart.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

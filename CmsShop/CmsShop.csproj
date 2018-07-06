@@ -259,6 +259,8 @@
     <Content Include="admin-lte\js\demo.js" />
     <Content Include="admin-lte\js\pages\dashboard.js" />
     <Content Include="admin-lte\js\pages\dashboard2.js" />
+    <Content Include="admin-lte\plugins\chartjs\Chart.js" />
+    <Content Include="admin-lte\plugins\chartjs\Chart.min.js" />
     <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.css" />
     <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.js" />
     <Content Include="admin-lte\plugins\datatables\dataTables.bootstrap.min.css" />
