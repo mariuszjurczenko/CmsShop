@@ -1,4 +1,6 @@
 # CmsShop
+mariuszjurczenko@dev-hobby.pl
+
 Projekt ten łączy w sobie funkcjonalność CMSa – systemu do zarządzania treścią oraz funkcjonalność sklepu internetowego. 
 Wszystko to jest zrealizowane w jednym projekcie. 
 Zawartość kursu mogła by być wykorzystana w kilku osobnych kursach takich jak: 
@@ -31,4 +33,4 @@ W projekcie zostały wykorzystane technologie:
 – CKEditor, Roxy File Manager, Drag And Drop 
 – i inne …
 
-http://dev-hobby.pl/
+Link do kursu https://dev-hobby.pl/kursy/cmsshop-praktyczny-projekt-w-asp-net-mvc/
